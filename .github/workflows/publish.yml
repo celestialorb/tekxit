@@ -1,0 +1,18 @@
+name: Container Image Publish
+on: [push]
+jobs:
+  build-container-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: login
+        run: |
+          echo $REGISTRY_PAT | docker login ghcr.io -u celestialorb --password-stdin
+        env:
+          REGISTRY_PAT: ${{ secrets.REGISTRY_PAT }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          file: "Dockerfile_Server"
+          push: true
+          tags: ghcr.io/celestialorb/tekxit:latest
