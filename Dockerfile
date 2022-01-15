@@ -2,8 +2,6 @@ FROM openjdk:8-jre-alpine
 
 ARG TEKXIT_VERSION="1.0.4"
 ENV TEKXIT_SERVER_PROPERTIES_FILE="/opt/tekxit/server.properties.orig"
-ENV TEKXIT_SERVER_UNIVERSE_DIRECTORY="/opt/tekxit/universe"
-ENV TEKXIT_SERVER_WORLD="world"
 
 # The user that runs the minecraft server and own all the data
 # you may want to change this to match your local user
@@ -46,4 +44,4 @@ RUN ln -s $(find ./ -maxdepth 1 -type f -name "forge*.jar") ./forge.jar
 
 # EXPOSE 19132
 EXPOSE 25565
-ENTRYPOINT [ "sh", "-c", "cp ${TEKXIT_SERVER_PROPERTIES_FILE} ./server.properties && java -server -jar ./forge.jar --nogui --universe ${TEKXIT_SERVER_UNIVERSE_DIRECTORY} --world ${TEKXIT_SERVER_WORLD}" ]
+ENTRYPOINT [ "sh", "-c", "cp ${TEKXIT_SERVER_PROPERTIES_FILE} ./server.properties && java -server -jar ./forge.jar --nogui" ]
