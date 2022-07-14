@@ -41,6 +41,8 @@ RUN \
 
 # Make a link to the forge JAR file.
 RUN ln -s $(find ./ -maxdepth 1 -type f -name "forge*.jar") ./forge.jar
+RUN mkdir -p /opt/tekxit/data
+WORKDIR /opt/tekxit/data
 
 # EXPOSE 19132
 EXPOSE 25565
